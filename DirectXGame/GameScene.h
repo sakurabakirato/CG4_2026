@@ -1,10 +1,14 @@
 #pragma once
 #include "KamataEngine.h"
+#include "Model2.h"
 
 //ゲームシーン
 class GameScene 
 {
 public:
+	//デストラクタ
+	~GameScene();
+
 	//初期化
 	void Initialize();
 
