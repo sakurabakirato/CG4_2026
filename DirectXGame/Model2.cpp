@@ -20,7 +20,8 @@
 using namespace std;
 using namespace Microsoft::WRL;
 
-namespace KamataEngine {
+namespace KamataEngine 
+{
 
 /// <summary>
 /// 静的メンバ変数の実体
@@ -132,7 +133,8 @@ Model2* Model2::CreateSphere(uint32_t divisionVertial, uint32_t divisionHorizont
 }
 
 // 四角形モデルの生成
-Model2* Model2::CreateSquare(int max) {
+Model2* Model2::CreateSquare(int max) 
+{
 	// メモリ確保
 	Model2* instance = new Model2;
 	std::vector<Mesh::VertexPosNormalUv> vertices;
@@ -146,28 +148,35 @@ Model2* Model2::CreateSquare(int max) {
 	vertices.resize(kNumVertices);
 	indices.resize(kNumIndices);
 
-	for (int i = 0; i < max; i++) {
+	for (int i = 0; i < max; i++) 
+	{
 		int index = i * 4;
-		// 左下
-		vertices[index + 0].pos = {i * 2 + -10.0f, -10.0f, 0.0f};
+
+		float size = 5.0f;
+		float spacing = 10.0f;
+
+		float offsetX = (i - (max - 1) / 2.0f) * spacing;
+
+		vertices[index + 0].pos = {-size + offsetX, -size, 0.0f};
 		vertices[index + 0].uv = {0, 1};
 		vertices[index + 0].normal = {0, 0, 1};
-		// 左上
-		vertices[index + 1].pos = {i * 2 + -10.0f, 10.0f, 0.0f};
+
+		vertices[index + 1].pos = {-size + offsetX, size, 0.0f};
 		vertices[index + 1].uv = {0, 0};
 		vertices[index + 1].normal = {0, 0, 1};
-		// 右下
-		vertices[index + 2].pos = {i * 2 + 10.0f, -10.0f, 0.0f};
+
+		vertices[index + 2].pos = {size + offsetX, -size, 0.0f};
 		vertices[index + 2].uv = {1, 1};
 		vertices[index + 2].normal = {0, 0, 1};
-		// 右上
-		vertices[index + 3].pos = {i * 2 + 10.0f, 10.0f, 0.0f};
+
+		vertices[index + 3].pos = {size + offsetX, size, 0.0f};
 		vertices[index + 3].uv = {1, 0};
 		vertices[index + 3].normal = {0, 0, 1};
 	}
 
 	// インデックス
-	for (int i = 0; i < max; i++) {
+	for (int i = 0; i < max; i++) 
+	{
 		int index = i * 6;
 		int vertex = i * 4;
 		indices[index + 0] = vertex + 0;

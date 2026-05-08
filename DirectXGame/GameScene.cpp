@@ -11,7 +11,7 @@ void GameScene::Initialize()
 { 
 	Model2::StaticInitialize();
 
-	model_ = Model2::CreateSquare(1); // ←四角形
+	model_ = Model2::CreateSquare(5); // ←四角形
 	worldTransform_.Initialize();
 	camera_.Initialize();
 
