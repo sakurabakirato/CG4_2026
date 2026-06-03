@@ -1,6 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
-#include "Model2.h"
+#include "Effect.h"
 
 //ゲームシーン
 class GameScene 
