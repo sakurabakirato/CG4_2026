@@ -4,15 +4,15 @@ using namespace KamataEngine;
 
 GameScene::~GameScene() 
 { 
-	Model2::StaticFinalize(); 
+	Effect::StaticFinalize(); 
 }
 
 void GameScene::Initialize() 
 { 
-	Model2::StaticInitialize();
+	Effect::StaticInitialize();
 
-	//model_ = Model2::CreateSquare(5); // ←四角形
-	model_ = Model2::CreateRing(8);
+	effect_ = Effect::CreateSquare(1); // ←四角形 ()内の数字を増やすと個数が増え、四角形がぴったり並んで配置される
+	/*effect_ = Effect::CreateRing(8);*/
 	worldTransform_.Initialize();
 	camera_.Initialize();
 
@@ -30,11 +30,11 @@ void GameScene::Draw()
 	ID3D12GraphicsCommandList* cmdList = DirectXCommon::GetInstance()->GetCommandList();
 
 	// 描画開始
-	Model2::PreDraw(cmdList);
+	Effect::PreDraw(cmdList);
 
 	// モデル描画
-	model_->Draw(worldTransform_, camera_, textureHandle_);
+	effect_->Draw(worldTransform_, camera_, textureHandle_);
 
 	// 描画終了
-	Model2::PostDraw();
+	Effect::PostDraw();
 }

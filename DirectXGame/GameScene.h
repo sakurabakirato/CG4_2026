@@ -20,7 +20,7 @@ public:
 	void Draw();
 
 private:
-	KamataEngine::Model2* model_ = nullptr;
+	KamataEngine::Effect* effect_ = nullptr;
 	KamataEngine::WorldTransform worldTransform_;
 	KamataEngine::Camera camera_;
 

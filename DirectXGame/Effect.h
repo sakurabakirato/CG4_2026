@@ -8,7 +8,8 @@
 #include <unordered_map>
 #include <vector>
 
-namespace KamataEngine {
+namespace KamataEngine 
+{
 
 class Camera;
 class WorldTransform;
@@ -16,7 +17,8 @@ class WorldTransform;
 /// <summary>
 /// モデル共通データ
 /// </summary>
-class ModelCommon2 {
+class ModelCommon2 
+{
 public:
 	static ModelCommon2* GetInstance();
 	static void Terminate();
@@ -86,12 +88,14 @@ private:
 /// <summary>
 /// モデルデータ
 /// </summary>
-class Model2 {
+class Effect
+{
 public: // 列挙子
 	/// <summary>
 	/// ルートパラメータ番号
 	/// </summary>
-	enum class RoomParameter {
+	enum class RoomParameter 
+	{
 		kWorldTransform, // ワールド変換行列
 		kCamera,         // カメラ
 		kMaterial,       // マテリアル
@@ -119,7 +123,7 @@ public: // 静的メンバ関数
 	/// 3Dモデル生成
 	/// </summary>
 	/// <returns></returns>
-	static Model2* Create();
+	static Effect* Create();
 
 	/// <summary>
 	/// OBJファイルからメッシュ生成
@@ -127,7 +131,7 @@ public: // 静的メンバ関数
 	/// <param name="modelname">モデル名</param>
 	/// <param name="modelname">エッジ平滑化フラグ</param>
 	/// <returns>生成されたモデル</returns>
-	static Model2* CreateFromOBJ(const std::string& modelname, bool smoothing = false);
+	static Effect* CreateFromOBJ(const std::string& modelname, bool smoothing = false);
 
 	/// <summary>
 	/// 球モデル生成
@@ -135,15 +139,15 @@ public: // 静的メンバ関数
 	/// <param name="divisionVertial">垂直方向（緯度）分割数</param>
 	/// <param name="divisionHorizontal">水平方向（経度）分割数</param>
 	/// <returns>生成されたモデル</returns>
-	static Model2* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
+	static Effect* CreateSphere(uint32_t divisionVertial = 10, uint32_t divisionHorizontal = 10);
 
 	/// <summary>
 	/// 板モデル生成
 	/// </summary>
 	/// <returns></returns>
-	static Model2* CreateSquare(int max);
+	static Effect* CreateSquare(int max);
 
-	static Model2* CreateRing(int max);
+	static Effect* CreateRing(int max);
 
 	/// <summary>
 	/// 描画前処理
@@ -157,7 +161,7 @@ public: // 静的メンバ関数
 	static void PostDraw();
 
 public: // メンバ関数
-	~Model2() = default;
+	~Effect() = default;
 
 	/// <summary>
 	/// 描画
