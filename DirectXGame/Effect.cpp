@@ -256,6 +256,69 @@ Effect* Effect::CreateRing(int max) {
 	return instance;
 }
 
+Effect* Effect::CreateRhombus(int max) 
+{
+	// メモリ確保
+	Effect* instance = new Effect;
+
+	std::vector<Mesh::VertexPosNormalUv> vertices;
+	std::vector<uint32_t> indices;
+
+	// 頂点数
+	const uint32_t kNumVertices = 4 * max;
+	// インデックス数
+	const uint32_t kNumIndices = 6 * max;
+
+	vertices.resize(kNumVertices);
+	indices.resize(kNumIndices);
+
+	for (int i = 0; i < max; i++) 
+	{
+		int vertexIndex = i * 4;
+		int indexIndex = i * 6;
+
+		// 横に並べるためのずらし量
+		float offsetX = static_cast<float>(i) * 3.0f;
+
+		// 菱形のサイズ
+		float width = 10.0f;
+		float height = 10.0f;
+
+		// 上
+		vertices[vertexIndex + 0].pos = {offsetX + 0.0f, height, 0.0f};
+		vertices[vertexIndex + 0].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vertexIndex + 0].uv = {0.5f, 0.0f};
+
+		// 左
+		vertices[vertexIndex + 1].pos = {offsetX - width, 0.0f, 0.0f};
+		vertices[vertexIndex + 1].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vertexIndex + 1].uv = {0.0f, 0.5f};
+
+		// 下
+		vertices[vertexIndex + 2].pos = {offsetX + 0.0f, -height, 0.0f};
+		vertices[vertexIndex + 2].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vertexIndex + 2].uv = {0.5f, 1.0f};
+
+		// 右
+		vertices[vertexIndex + 3].pos = {offsetX + width, 0.0f, 0.0f};
+		vertices[vertexIndex + 3].normal = {0.0f, 0.0f, 1.0f};
+		vertices[vertexIndex + 3].uv = {1.0f, 0.5f};
+
+		// 三角形2枚で菱形を作る
+		indices[indexIndex + 0] = vertexIndex + 0;
+		indices[indexIndex + 1] = vertexIndex + 2;
+		indices[indexIndex + 2] = vertexIndex + 1;
+
+		indices[indexIndex + 3] = vertexIndex + 0;
+		indices[indexIndex + 4] = vertexIndex + 3;
+		indices[indexIndex + 5] = vertexIndex + 2;
+	}
+
+	instance->InitializeFromVertices(vertices, indices);
+
+	return instance;
+}
+
 void Effect::PreDraw(ID3D12GraphicsCommandList* commandList) { ModelCommon2::GetInstance()->PreDraw(commandList); }
 
 void Effect::PostDraw() { ModelCommon2::GetInstance()->PostDraw(); }

@@ -149,6 +149,8 @@ public: // 静的メンバ関数
 
 	static Effect* CreateRing(int max);
 
+	static Effect* CreateRhombus(int max);
+
 	/// <summary>
 	/// 描画前処理
 	/// </summary>
