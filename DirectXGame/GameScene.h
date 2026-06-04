@@ -25,4 +25,7 @@ private:
 	KamataEngine::Camera camera_;
 
 	uint32_t textureHandle_ = 0;
+
+	float alpha_ = 1.0f;
+
 };

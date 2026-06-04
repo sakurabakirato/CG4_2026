@@ -13,7 +13,7 @@ void GameScene::Initialize()
 
 	//effect_ = Effect::CreateSquare(1); // ←四角形 ()内の数字を増やすと個数が増え、四角形がぴったり並んで配置される
 	/*effect_ = Effect::CreateRing(8);*/
-	effect_ = Effect::CreateRhombus(1);//菱形
+	effect_ = Effect::CreateRhombus(10);//菱形
 	worldTransform_.Initialize();
 
 	camera_.Initialize();
@@ -23,6 +23,15 @@ void GameScene::Initialize()
 
 void GameScene::Update() 
 {
+
+	alpha_ -= 0.01f;
+
+	if (alpha_ < 0.0f) {
+		alpha_ = 1.0f;
+	}
+
+	effect_->SetAlpha(alpha_);
+
 	worldTransform_.TransferMatrix();
 	camera_.TransferMatrix();
 }
