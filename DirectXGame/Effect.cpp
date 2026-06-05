@@ -279,8 +279,8 @@ Effect* Effect::CreateRhombus(int max)
 
 		// 菱形のサイズ
 		/*float width = 10.0f;*/
-		float baseWidth = 10.0f;
-		float height = 10.0f;
+		float baseWidth = 5.0f;
+		float height = 5.0f;
 		// 細さ
 		float thin = height * 0.05f;
 

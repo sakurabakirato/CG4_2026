@@ -1,6 +1,8 @@
 #pragma once
 #include "KamataEngine.h"
 #include "Effect.h"
+#include <list>
+#include <memory>
 
 //ゲームシーン
 class GameScene 
@@ -12,6 +14,8 @@ public:
 
 	//初期化
 	void Initialize();
+
+	void StarBorn(KamataEngine::Vector3 position);
 
 	//更新
 	void Update();
@@ -26,6 +30,17 @@ private:
 
 	uint32_t textureHandle_ = 0;
 
-	float alpha_ = 1.0f;
+	struct Star {
+		KamataEngine::WorldTransform worldTransform;
+		std::unique_ptr<KamataEngine::ObjectColor> objectColor;
+
+		float counter = 0.0f;
+		float lifeTime = 1.0f;
+		bool isFinished = false;
+
+		KamataEngine::Vector4 color = {1, 1, 1, 1};
+	};
+
+	std::list<Star> stars_;
 
 };
