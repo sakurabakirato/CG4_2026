@@ -33,24 +33,6 @@ void GameScene::Initialize()
 }
 
 void GameScene::StarBorn(Vector3 position) {
-	/*stars_.emplace_back();
-
-	Star& star = stars_.back();
-
-	star.worldTransform.Initialize();
-
-	star.objectColor = std::make_unique<ObjectColor>();
-	star.objectColor->Initialize();
-
-	star.worldTransform.translation_ = position;
-
-	float scale = 0.3f + (float)(rand() % 100) / 100.0f;
-	star.worldTransform.scale_ = {scale, scale, 1.0f};
-
-	star.color = {1.0f, 1.0f, 1.0f, 1.0f};
-	star.objectColor->SetColor(star.color);
-
-	star.worldTransform.TransferMatrix();*/
 	stars_.emplace_back();
 
 	Star& star = stars_.back();
@@ -63,6 +45,11 @@ void GameScene::StarBorn(Vector3 position) {
 	star.worldTransform.translation_ = position;
 
 	star.worldTransform.scale_ = {1.0f, 1.0f, 1.0f};
+
+	float angle = (float)(rand() % 360) * std::numbers::pi_v<float> / 180.0f;
+	float speed = 0.05f + (float)(rand() % 100) / 1000.0f;
+
+	star.velocity = {std::cos(angle) * speed, std::sin(angle) * speed, 0.0f};
 
 	star.color = {1.0f, 1.0f, 1.0f, 1.0f};
 	star.objectColor->SetColor(star.color);
@@ -100,6 +87,10 @@ void GameScene::Update()
 		if (star.counter >= star.lifeTime) {
 			star.isFinished = true;
 		}
+
+		star.worldTransform.translation_.x += star.velocity.x;
+		star.worldTransform.translation_.y += star.velocity.y;
+		star.worldTransform.translation_.z += star.velocity.z;
 
 		star.worldTransform.matWorld_ = MakeScaleMatrix(star.worldTransform.scale_) * MakeRotateZMatrix(star.worldTransform.rotation_.z) * MakeTranslateMatrix(star.worldTransform.translation_);
 

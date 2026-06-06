@@ -39,6 +39,7 @@ private:
 		bool isFinished = false;
 
 		KamataEngine::Vector4 color = {1, 1, 1, 1};
+		KamataEngine::Vector3 velocity;
 	};
 
 	std::list<Star> stars_;
