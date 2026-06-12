@@ -40,7 +40,7 @@ void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity)
 	color_ = {1, 1, 0, 1};
 	objectColor_.SetColor(color_);
 
-	worldTransform_.TransferMatrix();
+	worldTransform_.UpdateMatrix();
 
 }
 
@@ -73,7 +73,7 @@ void Particle::Update()
 	worldTransform_.translation_ += velocity_;
 
 	// 行列を更新
-	worldTransform_.TransferMatrix();
+	worldTransform_.UpdateMatrix();
 }
 
 // 描画

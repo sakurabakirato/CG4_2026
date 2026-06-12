@@ -33,6 +33,10 @@ void GameScene::Initialize()
 
 	// カメラの初期化
 	camera_.Initialize();
+	// 追加
+	camera_.translation_ = {0.0f, 0.0f, -50.0f};
+	camera_.rotation_ = {0.0f, 0.0f, 0.0f};
+	camera_.UpdateMatrix();
 }
 
 // 更新
@@ -65,12 +69,14 @@ void GameScene::Update()
 }
 
 // 描画
-void GameScene::Draw() {
+void GameScene::Draw() 
+{
 	// 3Dモデル描画前処理
 	Model::PreDraw();
 
 	// パーティクル描画
-	for (Particle* particle : particles_) {
+	for (Particle* particle : particles_) 
+	{
 		particle->Draw(camera_);
 	}
 
@@ -79,9 +85,11 @@ void GameScene::Draw() {
 }
 
 // パーティクルの発生
-void GameScene::ParticleBorn(Vector3 position) {
+void GameScene::ParticleBorn(Vector3 position) 
+{
 	// パーティクルの生成
-	for (int i = 0; i < 150; i++) {
+	for (int i = 0; i < 150; i++) 
+	{
 		// 生成
 		Particle* particle = new Particle();
 		// 位置
