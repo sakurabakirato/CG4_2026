@@ -6,23 +6,6 @@ using namespace MathUtility;
 // 初期化
 void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity)
 {
-	//// NULLポインタチェック
-	//assert(model);
-
-	//// 引数として受け取ったデータをメンバ変数に記録する
-	//model_ = model;
-	//worldTransform_.translation_ = position;
-	//velocity_ = velocity;
-
-	//// 大きさ
-	//worldTransform_.scale_ = { 0.2f, 0.2f, 0.2f };
-
-	//// ワールド変換の初期化
-	//worldTransform_.Initialize();
-
-	//// 色の設定
-	//objectColor_.Initialize();
-	//color_ = { 1, 1, 0, 1 };
 
 	assert(model);
 
