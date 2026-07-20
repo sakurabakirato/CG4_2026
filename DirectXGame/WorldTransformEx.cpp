@@ -3,7 +3,8 @@
 using namespace KamataEngine;
 using namespace MathUtility;
 
-void WorldTransform::UpdateMatrix() {
+void WorldTransform::UpdateMatrix() 
+{
 	// スケーリング行列の作成
 	Matrix4x4 matScale = MakeScaleMatrix(scale_);
 

@@ -30,8 +30,9 @@ void Particle::Initialize(Model* model, Vector3 position, Vector3 velocity)
 // 更新
 void Particle::Update()
 {
-		// 終了なら何もしない
-	if (isFinished_) {
+	// 終了なら何もしない
+	if (isFinished_) 
+	{
 		return;
 	}
 
@@ -39,7 +40,8 @@ void Particle::Update()
 	counter_ += 1.0f / 60.0f;
 
 	// 存続時間の上限に達したら
-	if (counter_ >= kDuration) {
+	if (counter_ >= kDuration) 
+	{
 		counter_ = kDuration;
 		// 終了扱いにする
 		isFinished_ = true;
@@ -52,7 +54,6 @@ void Particle::Update()
 	objectColor_.SetColor(color_);
 
 	// 移動
-	//worldTransform_.translation_ += {0.0f, 0.1f, 0.0f};
 	worldTransform_.translation_ += velocity_;
 
 	// 行列を更新

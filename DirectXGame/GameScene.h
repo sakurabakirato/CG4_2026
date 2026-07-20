@@ -4,7 +4,8 @@
 #include "Particle.h"
 
 // ゲームシーン
-class GameScene {
+class GameScene 
+{
 public:
 	/// <summary>
 	/// デストラクタ
@@ -26,13 +27,15 @@ public:
 	/// </summary>
 	void Draw();
 
+	// デスフラグのgetter
+	bool IsFinished() const { return finished_; }
+
 private:
 	// パーティクル3Dモデルデータ
 	KamataEngine::Model* modelParticle_ = nullptr;
 
 	// カメラ
 	KamataEngine::Camera camera_;
-
 	// パーティクル
 	Particle* particle_ = nullptr;
 	std::list<Particle*> particles_;
@@ -42,4 +45,9 @@ private:
 	/// </summary>
 	/// <param name="position">位置</param>
 	void ParticleBorn(Vector3 position);
+
+
+	// 終了フラグ
+	bool finished_ = false;
+
 };

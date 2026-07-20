@@ -6,10 +6,12 @@
 #include <type_traits>
 #include <wrl.h>
 
-namespace KamataEngine {
+namespace KamataEngine 
+{
 
 // 定数バッファ用データ構造体
-struct ConstBufferDataWorldTransform {
+struct ConstBufferDataWorldTransform 
+{
 	Matrix4x4 matWorld; // ローカル → ワールド変換行列
 	Matrix4x4 worldInverseTranspose; // 逆転置行列
 };
@@ -17,7 +19,8 @@ struct ConstBufferDataWorldTransform {
 /// <summary>
 /// ワールド変換データ
 /// </summary>
-class WorldTransform {
+class WorldTransform 
+{
 public:
 	// ローカルスケール
 	Vector3 scale_ = {1, 1, 1};

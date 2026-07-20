@@ -37,6 +37,7 @@ void GameScene::Initialize()
 	camera_.translation_ = {0.0f, 0.0f, -50.0f};
 	camera_.rotation_ = {0.0f, 0.0f, 0.0f};
 	camera_.UpdateMatrix();
+
 }
 
 // 更新
@@ -71,6 +72,7 @@ void GameScene::Update()
 // 描画
 void GameScene::Draw() 
 {
+
 	// 3Dモデル描画前処理
 	Model::PreDraw();
 
@@ -79,7 +81,6 @@ void GameScene::Draw()
 	{
 		particle->Draw(camera_);
 	}
-
 	// 3Dモデル描画後処理
 	Model::PostDraw();
 }
@@ -92,8 +93,6 @@ void GameScene::ParticleBorn(Vector3 position)
 	{
 		// 生成
 		Particle* particle = new Particle();
-		// 位置
-		// Vector3 position = { 0.0, 0.0f, 0.0f };
 		// 移動量
 		Vector3 velocity = {distribution(randomEngine), distribution(randomEngine), 0};
 		Normalize(velocity);

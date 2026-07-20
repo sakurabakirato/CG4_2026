@@ -1,8 +1,83 @@
 #include <Windows.h>
 #include <KamataEngine.h>
 #include "GameScene.h"
+#include "TitleScene.h"
 
 using namespace KamataEngine;
+
+GameScene* gameScene = nullptr;
+TitleScene* titleScene = nullptr;
+
+//シーン(型)
+enum class Scene 
+{ 
+	kUnknown = 0,
+	kTitle,
+	kGame,
+};
+
+//現在シーン(型)
+Scene scene = Scene::kUnknown;
+
+//シーン切り替えの関数
+void ChangeScene() 
+{
+	switch (scene) 
+	{
+	case Scene::kTitle:
+		if (titleScene->IsFinished()) 
+		{
+			//シーン変更
+			scene = Scene::kGame;
+			//旧シーンの開放
+			delete titleScene;
+			titleScene = nullptr;
+			//新シーンの生成と初期化
+			gameScene = new GameScene;
+			gameScene->Initialize();
+		}
+		break;
+	case Scene::kGame:
+		if (gameScene->IsFinished()) 
+		{
+			// シーン変更
+			scene = Scene::kTitle;
+			// 旧シーンの開放
+			delete gameScene;
+			gameScene = nullptr;
+			// 新シーンの生成と初期化
+			titleScene = new TitleScene;
+			titleScene->Initialize();
+		}
+		break;
+	}
+}
+
+void UpdateScene() 
+{ 
+	switch (scene) 
+	{ 
+	case Scene::kTitle:
+		titleScene->Update();
+		break;
+	case Scene::kGame:
+		gameScene->Update();
+		break;
+	} 
+}
+
+void DrawScene() 
+{
+	switch (scene) 
+	{
+	case Scene::kTitle:
+		titleScene->Draw();
+		break;
+	case Scene::kGame:
+		gameScene->Draw();
+		break;
+	}
+}
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) 
@@ -13,13 +88,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	//エンジンの初期化
 	KamataEngine::Initialize(L"LE3D_10_サクラバ_キラト_CG4");
 
-	//ゲームシーンのインスタンス生成
-	GameScene* gameScene = new GameScene();
-	//ゲームシーンの初期化
-	gameScene->Initialize();
-
-
-
+	//最初のシーンの初期化
+	scene = Scene::kTitle;
+	titleScene = new TitleScene;
+	titleScene->Initialize();
+	
 	//メインループ
 	while (true) 
 	{
@@ -29,17 +102,16 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 			break;
 		}
 
-		//ゲームシーンの更新
-		gameScene->Update();
-
+		// シーンの切り替え
+		ChangeScene();
+		// 現在のシーン更新
+		UpdateScene();
 
 		//描画開始
 		dxCommon->PreDraw();
 
-
-		//ゲームシーン描画
-		gameScene->Draw();
-
+		// 現在のシーン描画
+		DrawScene();
 
 		//描画終了
 		dxCommon->PostDraw();
@@ -48,6 +120,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 
 	//ゲームシーンの解放
 	delete gameScene;
+	delete titleScene;
+
 	//nullptrの代入
 	gameScene = nullptr;
 
