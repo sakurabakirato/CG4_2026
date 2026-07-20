@@ -2,6 +2,7 @@
 
 #include "KamataEngine.h"
 #include "Particle.h"
+#include "Stage.h"
 
 // ゲームシーン
 class GameScene 
@@ -34,6 +35,8 @@ private:
 	// パーティクル3Dモデルデータ
 	KamataEngine::Model* modelParticle_ = nullptr;
 
+	Stage* stage_ = nullptr;
+
 	// カメラ
 	KamataEngine::Camera camera_;
 	// パーティクル
@@ -45,6 +48,9 @@ private:
 	/// </summary>
 	/// <param name="position">位置</param>
 	void ParticleBorn(Vector3 position);
+
+	// テクスチャハンドル
+	uint32_t textureHandleStage_ = 0;
 
 
 	// 終了フラグ

@@ -13,6 +13,7 @@ GameScene::~GameScene()
 {
 	// 3Dモデルデータの解放
 	delete modelParticle_;
+	delete stage_;
 
 	// パーティクルの解放
 	for (Particle* particle : particles_) 
@@ -30,6 +31,7 @@ void GameScene::Initialize()
 
 	// 3Dモデルデータの生成
 	modelParticle_ = Model::CreateSphere(4, 4);
+	textureHandleStage_ = TextureManager::Load("stage.png");
 
 	// カメラの初期化
 	camera_.Initialize();
@@ -38,11 +40,17 @@ void GameScene::Initialize()
 	camera_.rotation_ = {0.0f, 0.0f, 0.0f};
 	camera_.UpdateMatrix();
 
+	stage_ = new Stage();
+	stage_->Initialize(textureHandleStage_);
+
+
 }
 
 // 更新
 void GameScene::Update() 
 {
+	stage_->Update();
+
 	// 確率で発生
 	if (rand() % 3 == 0) 
 	{
@@ -72,6 +80,16 @@ void GameScene::Update()
 // 描画
 void GameScene::Draw() 
 {
+	// DirectXCommonインスタンスの取得
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+
+	// スプライト描画前処理
+	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	stage_->Draw();
+
+	// スプライト描画後処理
+	Sprite::PostDraw();
 
 	// 3Dモデル描画前処理
 	Model::PreDraw();
