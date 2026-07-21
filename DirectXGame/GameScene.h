@@ -1,8 +1,8 @@
 #pragma once
 
 #include "KamataEngine.h"
-#include "Particle.h"
 #include "Stage.h"
+#include "Player.h"
 
 // ゲームシーン
 class GameScene 
@@ -33,21 +33,14 @@ public:
 
 private:
 	// パーティクル3Dモデルデータ
-	KamataEngine::Model* modelParticle_ = nullptr;
+	KamataEngine::Model* modelPlayer_ = nullptr;
 
 	Stage* stage_ = nullptr;
+	Player* player_ = nullptr;
 
 	// カメラ
 	KamataEngine::Camera camera_;
-	// パーティクル
-	Particle* particle_ = nullptr;
-	std::list<Particle*> particles_;
 
-	/// <summary>
-	/// パーティクル発生
-	/// </summary>
-	/// <param name="position">位置</param>
-	void ParticleBorn(Vector3 position);
 
 	// テクスチャハンドル
 	uint32_t textureHandleStage_ = 0;
