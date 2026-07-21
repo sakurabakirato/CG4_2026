@@ -80,8 +80,6 @@ void GameScene::Draw()
 	// スプライト描画前処理
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
-
-
 	// スプライト描画後処理
 	Sprite::PostDraw();
 }
