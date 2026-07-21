@@ -14,6 +14,7 @@ GameScene::~GameScene()
 	delete stage_;
 	delete player_;
 	delete graphBar_;
+	delete drawNumber_;
 
 	delete modelPlayer_;
 }
@@ -27,6 +28,7 @@ void GameScene::Initialize()
 	// 3Dモデルデータの生成
 	textureHandleStage_ = TextureManager::Load("stage.png");
 	textureHandleGraph_ = TextureManager::Load("white1x1.png");
+	textureHandleNumber_ = TextureManager::Load("number.png");
 	modelPlayer_ = Model::CreateFromOBJ("player");
 
 	// カメラの初期化
@@ -45,6 +47,10 @@ void GameScene::Initialize()
 	graphBar_ = new GraphBar();
 	graphBar_->Initialize(textureHandleGraph_);
 
+	drawNumber_ = new DrawNumber();
+	drawNumber_->Initialize(textureHandleNumber_);
+
+
 }
 
 // 更新
@@ -61,6 +67,7 @@ void GameScene::Update()
 	stage_->Update(); 
 	player_->Update();
 	graphBar_->Update(hp_);
+	drawNumber_->Update(gameScore_);
 }
 
 // 描画
@@ -94,7 +101,7 @@ void GameScene::Draw()
 	Sprite::PreDraw(dxCommon->GetCommandList());
 
 	graphBar_->Draw();
-
+	drawNumber_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
