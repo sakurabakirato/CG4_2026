@@ -3,6 +3,7 @@
 #include "KamataEngine.h"
 #include "Stage.h"
 #include "Player.h"
+#include "GraphBar.h"
 
 // ゲームシーン
 class GameScene 
@@ -37,6 +38,7 @@ private:
 
 	Stage* stage_ = nullptr;
 	Player* player_ = nullptr;
+	GraphBar* graphBar_ = nullptr;
 
 	// カメラ
 	KamataEngine::Camera camera_;
@@ -44,9 +46,13 @@ private:
 
 	// テクスチャハンドル
 	uint32_t textureHandleStage_ = 0;
+	uint32_t textureHandleGraph_ = 0;
 
 
 	// 終了フラグ
 	bool finished_ = false;
+
+	int hp_ = 100;
+	int gameScore_ = 1;
 
 };
